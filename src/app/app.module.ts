@@ -3,16 +3,19 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { MatrixComponent } from './matrix/matrix.component';
+import { MatrixService } from './matrix.service';
+import { XparGateway } from './gateway/xpar.gateway';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
   ],
-  providers: [],
+  providers: [ XparGateway, MatrixService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
