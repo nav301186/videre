@@ -1,38 +1,47 @@
 import { Component } from '@angular/core';
 import { Chart } from 'chart.js';
 import { Stat } from './stat';
+import { MatrixService } from './matrix.service';
+import { Observable } from "rxjs/Observable";
+import { map } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   title = 'app';
+  data : Observable<Stat[]>;
+  labels: string[];
+  values: number[];
 
-  data = [
-    new Stat("naveen", "naveen2", 2, 11),
-    new Stat("naveen1", "naveen2", 2, 31),
-    new Stat("naveen3", "naveen2", 2, 31),
-    new Stat("naveen3", "naveen2", 2, 31),
-    new Stat("naveen3", "naveen2", 2, 31),
-    new Stat("naveen3", "naveen2", 2, 31),
-  ]
-
-  labels = this.data.map(e => e.getPair());
-  percentage = this.data.map(e => e.percent);
+  constructor(private matrixService: MatrixService) {
+    this.matrixService.getPairingStats()
+      .subscribe(result => {
+   this.labels = result.map(stat => stat.first_pair + stat.second_pair);
+   this.values = result.map(stat => stat.percent);
+    });
+  }
 
   ngAfterViewInit(){
+    this.matrixService.getPairingStats()
+      .subscribe(result => {
+   this.labels = result.map(stat => stat.first_pair + " & " +  stat.second_pair);
+   this.values = result.map(stat => stat.percent);
 
-let ctx = document.getElementById("myChart");
+    let ctx = document.getElementById("myChart");
+    console.log(this.values)
 
-  let myChart = new Chart(ctx, {
-    type: 'bar',
+    let myChart = new Chart(ctx, {
+      type: 'bar',
     data: {
-        labels: this.labels,
+      labels: this.labels,
         datasets: [{
             label: '# of Votes',
-            data: this.percentage,
+            data: this.values,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -62,6 +71,7 @@ let ctx = document.getElementById("myChart");
         }
     }
 });
+    });
   }
 
 }

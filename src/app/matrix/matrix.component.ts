@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Stat } from '../stat';
+import { IStat } from '../istat';
 
 @Component({
   selector: 'app-matrix',

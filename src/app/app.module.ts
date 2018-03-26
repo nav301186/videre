@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { MatrixComponent } from './matrix/matrix.component';
+import { HttpClientModule } from '@angular/common/http';
 import { MatrixService } from './matrix.service';
 import { XparGateway } from './gateway/xpar.gateway';
 
@@ -14,6 +15,7 @@ import { XparGateway } from './gateway/xpar.gateway';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule
   ],
   providers: [ XparGateway, MatrixService],
   bootstrap: [AppComponent]
