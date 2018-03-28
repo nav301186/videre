@@ -14,49 +14,42 @@ import { tap } from 'rxjs/operators';
 
 export class AppComponent {
   title = 'app';
-  data : Observable<Stat[]>;
-  labels: string[];
-  values: number[];
 
   constructor(private matrixService: MatrixService) {
-    this.matrixService.getPairingStats()
-      .subscribe(result => {
-   this.labels = result.map(stat => stat.first_pair + stat.second_pair);
-   this.values = result.map(stat => stat.percent);
-    });
   }
 
   ngAfterViewInit(){
     this.matrixService.getPairingStats()
       .subscribe(result => {
-   this.labels = result.map(stat => stat.first_pair + " & " +  stat.second_pair);
-   this.values = result.map(stat => stat.percent);
+
+        let labels = result.map(stat => {
+          if(stat.first_pair == stat.second_pair)
+          {
+            return stat.first_pair;
+          }
+          return stat.first_pair + " & " +  stat.second_pair
+        });
+        let values = result.map(stat => stat.days_paired);
+        console.log(labels)
+        console.log(values)
 
     let ctx = document.getElementById("myChart");
-    console.log(this.values)
-
+        Chart.defaults.global.defaultColor = "green";
     let myChart = new Chart(ctx, {
       type: 'bar',
     data: {
-      labels: this.labels,
+      labels: labels,
         datasets: [{
-            label: '# of Votes',
-            data: this.values,
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
+            label: '# of days paired',
+            data: values,
+            backgroundColor: '#ADFF2F',
             borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
+                // 'rgba(255,99,132,1)',
+                // 'rgba(54, 162, 235, 1)',
+                // 'rgba(255, 206, 86, 1)',
+                // 'rgba(75, 192, 192, 1)',
+                // 'rgba(153, 102, 255, 1)',
+                // 'rgba(255, 159, 64, 1)'
             ],
             borderWidth: 1
         }]
@@ -65,9 +58,14 @@ export class AppComponent {
         scales: {
             yAxes: [{
                 ticks: {
-                    beginAtZero:true
+                  beginAtZero:true,
                 }
-            }]
+            }],
+          xAxes: [{
+            ticks: {
+              autoSkip: false
+            }
+          }]
         }
     }
 });
