@@ -5,6 +5,8 @@ import { MatrixService } from './matrix.service';
 import { Observable } from "rxjs/Observable";
 import { map } from 'rxjs/operators';
 import { tap } from 'rxjs/operators';
+import { venn } from 'neustar-venn';
+import { d3 } from 'neustar-venn';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +20,7 @@ export class AppComponent {
   constructor(private matrixService: MatrixService) {
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit1(){
     this.matrixService.getPairingStats()
       .subscribe(result => {
 
@@ -70,6 +72,15 @@ export class AppComponent {
     }
 });
     });
+  }
+
+  ngAfterViewInit(){
+    var sets = [ {sets: ['A'], size: 12},
+             {sets: ['B'], size: 12},
+             {sets: ['A','B'], size: 2}];
+
+var chart = venn.VennDiagram()
+d3.select("#venn").datum(sets).call(chart);
   }
 
 }
