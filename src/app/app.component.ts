@@ -5,6 +5,8 @@ import { MatrixService } from './matrix.service';
 import { Observable } from "rxjs/Observable";
 import { map } from 'rxjs/operators';
 import { tap } from 'rxjs/operators';
+import * as d3 from 'd3';
+import * as venn from 'venn.js';
 
 @Component({
   selector: 'app-root',
@@ -19,57 +21,19 @@ export class AppComponent {
   }
 
   ngAfterViewInit(){
-    this.matrixService.getPairingStats()
-      .subscribe(result => {
-
-        let labels = result.map(stat => {
-          if(stat.first_pair == stat.second_pair)
-          {
-            return stat.first_pair;
-          }
-          return stat.first_pair + " & " +  stat.second_pair
-        });
-        let values = result.map(stat => stat.days_paired);
-        console.log(labels)
-        console.log(values)
-
-    let ctx = document.getElementById("myChart");
-        Chart.defaults.global.defaultColor = "green";
-    let myChart = new Chart(ctx, {
-      type: 'bar',
-    data: {
-      labels: labels,
-        datasets: [{
-            label: '# of days paired',
-            data: values,
-            backgroundColor: '#ADFF2F',
-            borderColor: [
-                // 'rgba(255,99,132,1)',
-                // 'rgba(54, 162, 235, 1)',
-                // 'rgba(255, 206, 86, 1)',
-                // 'rgba(75, 192, 192, 1)',
-                // 'rgba(153, 102, 255, 1)',
-                // 'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                  beginAtZero:true,
-                }
-            }],
-          xAxes: [{
-            ticks: {
-              autoSkip: false
-            }
-          }]
-        }
-    }
-});
-    });
+    venn.VennDiagram();
+    var sets = [ {sets: ['A'], size: 12},
+                 {sets: ['B'], size: 12},
+                 {sets: ['A','B'], size: 2}];
+ var colours = ['black', 'red', 'blue', 'green'];
+    var chart = venn.VennDiagram()
+    d3.select("#venn").datum(sets).call(chart);
+    d3.selectAll("#venn .venn-circle path")
+    .style("fill-opacity", 0.2)
+                .style("stroke-width", 10)
+                .style("stroke-opacity", .5)
+                .style("fill", function(d,i) { return colours[i]; })
+                .style("stroke", function(d,i) { return colours[i]; });
   }
 
 }
