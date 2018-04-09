@@ -27,7 +27,116 @@ export class MatrixService {
   }
 
   get_response(){
-    return JSON.parse(JSON.stringify([{"second_pair":"anup","percent":5.9259259259259265,"first_pair":"anup","days_paired":8},{"second_pair":"sabrina","percent":0.7407407407407408,"first_pair":"ben","days_paired":1},{"second_pair":"ben","percent":0.7407407407407408,"first_pair":"anup","days_paired":1},{"second_pair":"sabrina","percent":2.9629629629629632,"first_pair":"sabrina","days_paired":4},{"second_pair":"serdar","percent":4.444444444444445,"first_pair":"ganesh","days_paired":6},{"second_pair":"manu","percent":0.7407407407407408,"first_pair":"koustubh","days_paired":1},{"second_pair":"koustubh","percent":1.4814814814814816,"first_pair":"ganesh","days_paired":2},{"second_pair":"nelson","percent":0.7407407407407408,"first_pair":"koustubh","days_paired":1},{"second_pair":"manu","percent":2.9629629629629632,"first_pair":"david","days_paired":4},{"second_pair":"naveen","percent":0.7407407407407408,"first_pair":"daniel","days_paired":1},{"second_pair":"alex","percent":0.7407407407407408,"first_pair":"alex","days_paired":1},{"second_pair":"serdar","percent":1.4814814814814816,"first_pair":"ben","days_paired":2},{"second_pair":"david","percent":0.7407407407407408,"first_pair":"abhinav","days_paired":1},{"second_pair":"nelson","percent":0.7407407407407408,"first_pair":"daniel","days_paired":1},{"second_pair":"david","percent":1.4814814814814816,"first_pair":"ben","days_paired":2},{"second_pair":"naveen","percent":0.7407407407407408,"first_pair":"anup","days_paired":1},{"second_pair":"nikunj","percent":2.2222222222222223,"first_pair":"manu","days_paired":3},{"second_pair":"dennis","percent":1.4814814814814816,"first_pair":"dennis","days_paired":2},{"second_pair":"nelson","percent":2.9629629629629632,"first_pair":"nelson","days_paired":4},{"second_pair":"sabrina","percent":1.4814814814814816,"first_pair":"anup","days_paired":2},{"second_pair":"naveen","percent":0.7407407407407408,"first_pair":"alex","days_paired":1},{"second_pair":"manu","percent":0.7407407407407408,"first_pair":"anup","days_paired":1},{"second_pair":"prutha","percent":0.7407407407407408,"first_pair":"nikunj","days_paired":1},{"second_pair":"sebastian","percent":0.7407407407407408,"first_pair":"sabrina","days_paired":1},{"second_pair":"nelson","percent":0.7407407407407408,"first_pair":"ashish","days_paired":1},{"second_pair":"prutha","percent":2.9629629629629632,"first_pair":"manu","days_paired":4},{"second_pair":"prutha","percent":2.2222222222222223,"first_pair":"prutha","days_paired":3},{"second_pair":"serdar","percent":2.2222222222222223,"first_pair":"manu","days_paired":3},{"second_pair":"prutha","percent":0.7407407407407408,"first_pair":"ben","days_paired":1},{"second_pair":"nelson","percent":2.2222222222222223,"first_pair":"manu","days_paired":3},{"second_pair":"sebastian","percent":1.4814814814814816,"first_pair":"naveen","days_paired":2},{"second_pair":"manu","percent":9.62962962962963,"first_pair":"manu","days_paired":13},{"second_pair":"daniel","percent":0.7407407407407408,"first_pair":"anup","days_paired":1},{"second_pair":"sebastian","percent":0.7407407407407408,"first_pair":"prutha","days_paired":1},{"second_pair":"ganesh","percent":5.9259259259259265,"first_pair":"ganesh","days_paired":8},{"second_pair":"serdar","percent":1.4814814814814816,"first_pair":"anup","days_paired":2},{"second_pair":"david","percent":2.2222222222222223,"first_pair":"david","days_paired":3},{"second_pair":"sebastian","percent":0.7407407407407408,"first_pair":"alex","days_paired":1},{"second_pair":"serdar","percent":0.7407407407407408,"first_pair":"serdar","days_paired":1},{"second_pair":"manu","percent":2.9629629629629632,"first_pair":"ganesh","days_paired":4},{"second_pair":"dennis","percent":1.4814814814814816,"first_pair":"daniel","days_paired":2},{"second_pair":"manu","percent":0.7407407407407408,"first_pair":"daniel","days_paired":1},{"second_pair":"koustubh","percent":1.4814814814814816,"first_pair":"ben","days_paired":2},{"second_pair":"nikunj","percent":0.7407407407407408,"first_pair":"ben","days_paired":1},{"second_pair":"prutha","percent":0.7407407407407408,"first_pair":"david","days_paired":1},{"second_pair":"manu","percent":1.4814814814814816,"first_pair":"abhinav","days_paired":2},{"second_pair":"nelson","percent":2.2222222222222223,"first_pair":"alex","days_paired":3},{"second_pair":"dennis","percent":1.4814814814814816,"first_pair":"anup","days_paired":2},{"second_pair":"nelson","percent":2.2222222222222223,"first_pair":"anup","days_paired":3},{"second_pair":"dennis","percent":0.7407407407407408,"first_pair":"david","days_paired":1},{"second_pair":"nikunj","percent":2.9629629629629632,"first_pair":"nikunj","days_paired":4},{"second_pair":"ben","percent":0.7407407407407408,"first_pair":"ben","days_paired":1},{"second_pair":"prutha","percent":1.4814814814814816,"first_pair":"ganesh","days_paired":2},{"second_pair":"anup","percent":0.7407407407407408,"first_pair":"alex","days_paired":1},{"second_pair":"ganesh","percent":2.2222222222222223,"first_pair":"david","days_paired":3},{"second_pair":"koustubh","percent":1.4814814814814816,"first_pair":"koustubh","days_paired":2},{"second_pair":"sebastian","percent":0.7407407407407408,"first_pair":"sebastian","days_paired":1}]))
+    return JSON.parse(JSON.stringify([
+    {
+        "second_pair": "anup",
+        "percent": 16.901408450704224,
+        "first_pair": "anup",
+        "days_paired": 12
+    },
+    {
+        "second_pair": "ben",
+        "percent": 1.4084507042253522,
+        "first_pair": "anup",
+        "days_paired": 1
+    },
+    {
+        "second_pair": "daniel",
+        "percent": 1.4084507042253522,
+        "first_pair": "anup",
+        "days_paired": 1
+    },
+    {
+        "second_pair": "nelson",
+        "percent": 4.225352112676056,
+        "first_pair": "anup",
+        "days_paired": 3
+    },
+    {
+        "second_pair": "sabrina",
+        "percent": 2.8169014084507045,
+        "first_pair": "anup",
+        "days_paired": 2
+    },
+    {
+        "second_pair": "serdar",
+        "percent": 4.225352112676056,
+        "first_pair": "anup",
+        "days_paired": 3
+    },
+    {
+        "second_pair": "nelson",
+        "percent": 2.8169014084507045,
+        "first_pair": "ashish",
+        "days_paired": 2
+    },
+    {
+        "second_pair": "ben",
+        "percent": 7.042253521126761,
+        "first_pair": "ben",
+        "days_paired": 5
+    },
+    {
+        "second_pair": "koustubh",
+        "percent": 2.8169014084507045,
+        "first_pair": "ben",
+        "days_paired": 2
+    },
+    {
+        "second_pair": "sabrina",
+        "percent": 1.4084507042253522,
+        "first_pair": "ben",
+        "days_paired": 4
+    },
+    {
+        "second_pair": "serdar",
+        "percent": 2.8169014084507045,
+        "first_pair": "ben",
+        "days_paired": 2
+    },
+    {
+        "second_pair": "anup",
+        "percent": 5.633802816901409,
+        "first_pair": "koustubh",
+        "days_paired": 4
+    },
+    {
+        "second_pair": "nelson",
+        "percent": 1.4084507042253522,
+        "first_pair": "daniel",
+        "days_paired": 1
+    },
+    {
+        "second_pair": "ashish",
+        "percent": 7.042253521126761,
+        "first_pair": "anup",
+        "days_paired": 5
+    },
+    {
+        "second_pair": "nelson",
+        "percent": 1.4084507042253522,
+        "first_pair": "koustubh",
+        "days_paired": 10
+    },
+    {
+        "second_pair": "nelson",
+        "percent": 14.084507042253522,
+        "first_pair": "nelson",
+        "days_paired": 10
+    },
+    {
+        "second_pair": "sabrina",
+        "percent": 7.042253521126761,
+        "first_pair": "sabrina",
+        "days_paired": 5
+    },
+    {
+        "second_pair": "serdar",
+        "percent": 15.492957746478872,
+        "first_pair": "serdar",
+        "days_paired": 11
+    }
+]))
   }
 
 }

@@ -29,12 +29,12 @@ export class AppComponent {
   ngAfterViewInit() {
     this.matrixService.dummyData()
       .subscribe(result => {
+        // result = _.take(result, result.length/2)
         let uniquePairs = result.map(stat => stat.first_pair);
-        let halfResult = _.take(result, result.length/2);
-        console.log(halfResult.length)
+        result = _.sortBy(result, function(o) {o.days_paired })
+        // let halfResult = _.take(result, result.length/2);
         console.log(result.length)
-        result = halfResult;
-        let labels = halfResult.map(stat => {
+        let labels = result.map(stat => {
           if (stat.first_pair == stat.second_pair) {
             return stat.first_pair;
           }
@@ -43,37 +43,43 @@ export class AppComponent {
 
         let values = result.map(stat => stat.days_paired);
 
-        venn.VennDiagram();
-
         let all_sets = [];
-        let all_names = [];
-        let sets = halfResult.forEach(stat => {
-          all_names.push(stat.first_pair);
-          all_names.push(stat.second_pair);
-
+        let sets = result.forEach(stat => {
           if(stat.first_pair != stat.second_pair){
-            all_sets.push({ sets: [stat.first_pair], size: this.totalNumberOfDaysPaired(result, stat.first_pair), weight: 1e-10});
-            all_sets.push({ sets: [stat.second_pair], size: this.totalNumberOfDaysPaired(result, stat.second_pair) , weight: 1e-10});
-          all_sets.push({ sets: [stat.first_pair, stat.second_pair], size: stat.days_paired });
+            //People who have paired more should have a bigger circle
+             all_sets.push({ sets: [stat.first_pair], size: this.totalNumberOfDaysPaired(result, stat.first_pair)});
+             all_sets.push({ sets: [stat.second_pair], size: this.totalNumberOfDaysPaired(result, stat.second_pair)});
+            all_sets.push({ sets: [stat.first_pair, stat.second_pair], size: stat.days_paired });
           }
           else {
-          all_sets.push({ sets: [stat.first_pair], size: this.totalNumberOfDaysPaired(result, stat.first_pair)*3});
+          // all_sets.push({ sets: [stat.first_pair], size: this.totalNumberOfDaysPaired(result, stat.first_pair)*3});
           }
         });
 
-        let unique_names = all_names.filter((el, i, a) => i === a.indexOf(el))
-        var chart = venn.VennDiagram()
+        let chart = venn.VennDiagram()
           .wrap(false)
           .fontSize("16px")
           .width(1200)
           .height(1000);
 
         d3.select("#venn").datum(all_sets).call(chart);
+        var colours = ['red', 'green', 'blue', "yellow", "yellow", ,"skyblue", "brown", "magenta"];
 
-        d3.selectAll("#venn .venn-circle path")
-        .style("fill-opacity", 0.2)
-          .style("stroke-width", 10)
-          .style("stroke-opacity", .5);
+        // d3.selectAll("#venn .venn-circle path")
+        // .style("fill-opacity", 0)
+        //   .style("stroke-width", 10)
+        //   .style("stroke-opacity", 1);
+
+         d3.selectAll("#venn .venn-circle path")
+                .style("fill-opacity", 0.1)
+                .style("stroke-width", 10)
+                .style("stroke-opacity", .5)
+                .style("stroke", function(d,i) { return colours[i%8]; });
+
+            d3.selectAll("#venn .venn-circle text")
+                .style("fill", function(d,i) { return colours[i%8]})
+                .style("font-size", "24px")
+                .style("font-weight", "100");
       });
 
   }
