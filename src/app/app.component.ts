@@ -31,7 +31,7 @@ export class AppComponent {
   }
 
   ngAfterViewInit() {
-    this.matrixService.dummyData()
+    this.matrixService.getPairingStats()
       .subscribe(result => {
         // result = _.take(result, result.length/2)
         let all_names = [];
@@ -52,19 +52,40 @@ export class AppComponent {
       cardGroup.className = 'card-columns';
       document.getElementsByTagName('body')[0].appendChild(cardGroup);
 
-        this.pairs_groups.forEach(pair => this.drawChart(pair))
+        this.pairs_groups.forEach(grp => this.drawChart(grp, uniquePairs))
       });
   }
 
-    drawChart(group){
+  drawChart(group, uniquePairs){
       let result = group.pairs;
       let all_sets  = [];
+
+    let all_memeber_in_grp = _.unique( _.flatten(result.map(pair => {
+      let list = [];
+      list.push(pair.first_pair);
+      list.push(pair.second_pair);
+      return list;
+    })));
+
+
+    let non_pairing_members = uniquePairs.filter(name => !_.contains(all_memeber_in_grp, name));
+    // non_pairing_members.forEach(name => {
+    // all_sets.push({ sets: [name], size: 100});
+    // all_sets.push({ sets: [group.name], size: 0});
+    // })
+    // let npm_data = non_pairing_members.forEach(npm => {
+    //   let set = {sets: [npm], size: 500};
+    //   all_sets.push(set);
+    // });
+
+    console.log(non_pairing_members)
+
       console.log(group)
         let sets = result.forEach(stat => {
           if(stat.first_pair != stat.second_pair){
-             all_sets.push({ sets: [stat.first_pair], size: this.totalNumberOfDaysPaired(result, stat.first_pair) });
-             all_sets.push({ sets: [stat.second_pair], size: this.totalNumberOfDaysPaired(result, stat.second_pair)});
-            all_sets.push({ sets: [stat.first_pair, stat.second_pair], size: stat.days_paired });
+            all_sets.push({ sets: [stat.first_pair], size: this.totalNumberOfDaysPaired(result, stat.first_pair)*80 });
+            all_sets.push({ sets: [stat.second_pair], size: this.totalNumberOfDaysPaired(result, stat.second_pair)*80});
+            all_sets.push({ sets: [stat.first_pair, stat.second_pair], size: stat.days_paired*50 });
           }
         })
 
@@ -76,8 +97,8 @@ export class AppComponent {
 
         let chart = venn.VennDiagram()
         .wrap(false)
-        .width(450)
-        .height(450)
+        .width(550)
+        .height(750)
 
       let div_id = "#" + id
 
@@ -85,8 +106,8 @@ export class AppComponent {
         var colours = ['red', 'green', 'blue', "yellow", "yellow", ,"skyblue", "brown", "magenta"];
       // document.getElementsByClassName("card").style.color = "red";
          d3.selectAll(div_id + " .venn-circle path")
-                .style("fill-opacity", 0.2)
-                .style("stroke-width", 8)
+                .style("fill-opacity", 0.1)
+                .style("stroke-width", 5)
                 .style("stroke-opacity", .5)
                 .style("left-margin", 0)
                 .style("stroke", function(d,i) { return colours[i%7]; });
