@@ -8,7 +8,6 @@ import { tap } from 'rxjs/operators';
 import * as d3 from 'd3';
 import * as venn from 'venn.js';
 import * as _ from 'underscore';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
